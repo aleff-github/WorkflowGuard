@@ -1,0 +1,24 @@
+{
+  "reviewer": "codex",
+  "engagementId": "workflowguard-local-owasp-lab-2026",
+  "scopeConsistent": true,
+  "safetyConsistent": true,
+  "uiExecutionComplete": true,
+  "workflowGuardAssessmentMeaning": "VERIFIED is a replay-and-probe result and remains separate from the target security assessment.",
+  "juiceBasketInvariant": "VIOLATED",
+  "crapiDashboardInvariant": "PASSED",
+  "crapiVehicleLocationInvariant": "INCONCLUSIVE",
+  "privacyFinding": "PASSED",
+  "securityFinding": "VIOLATED",
+  "confidence": "HIGH",
+  "observations": [
+    "The fixed JAR was loaded into a fresh Burp process.",
+    "The crAPI actor-swap workflow completed through the WorkflowGuard UI with three successful HTTP exchanges and a passing invariant.",
+    "The exported post-fix evidence contains no live bearer value, e-mail address, or password value.",
+    "The native production-coordinator replay also passed after the fix."
+  ],
+  "limitations": [
+    "The missing crAPI vehicle resource is a laboratory-data limitation, not an application failure."
+  ],
+  "disposition": "RELEASE_CANDIDATE"
+}

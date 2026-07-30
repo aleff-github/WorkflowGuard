@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "secretHandling": {
+    "store": "Burp project or local password manager",
+    "agentAccess": false,
+    "repositoryStorage": false
+  },
+  "identities": [
+    {
+      "label": "juice-user-a",
+      "target": "juice-shop",
+      "usernameHint": "<configure-locally>",
+      "burpProjectReference": "WorkflowGuard Lab / Juice Shop / User A"
+    },
+    {
+      "label": "juice-user-b",
+      "target": "juice-shop",
+      "usernameHint": "<configure-locally>",
+      "burpProjectReference": "WorkflowGuard Lab / Juice Shop / User B"
+    },
+    {
+      "label": "crapi-user-a",
+      "target": "crapi",
+      "usernameHint": "<configure-locally>",
+      "burpProjectReference": "WorkflowGuard Lab / crAPI / User A"
+    },
+    {
+      "label": "crapi-user-b",
+      "target": "crapi",
+      "usernameHint": "<configure-locally>",
+      "burpProjectReference": "WorkflowGuard Lab / crAPI / User B"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "engagementId": "replace-with-engagement-id",
+  "status": "DRAFT",
+  "environment": "staging",
+  "authorization": {
+    "owner": "replace-with-system-owner",
+    "reference": "replace-with-written-authorization-reference",
+    "approvedBy": "",
+    "approvedAt": null,
+    "notBefore": "2030-01-01T09:00:00Z",
+    "notAfter": "2030-01-01T17:00:00Z"
+  },
+  "scope": {
+    "allowedOrigins": [
+      "https://staging.example.invalid"
+    ],
+    "excludedPathPrefixes": [
+      "/admin/destructive"
+    ],
+    "allowRedirects": false,
+    "allowedMethods": [
+      "GET",
+      "HEAD",
+      "OPTIONS"
+    ]
+  },
+  "identities": [
+    {
+      "label": "test-user",
+      "burpProjectReference": "configure-in-burp-without-exporting-secrets"
+    }
+  ],
+  "execution": {
+    "mode": "DRY_RUN",
+    "maxCases": 5,
+    "maxRequestsPerCase": 20,
+    "delayMilliseconds": 1000,
+    "concurrency": 1,
+    "stateChangingApproved": false,
+    "cleanupRequired": true
+  },
+  "evidence": {
+    "outputDirectory": "agy/output",
+    "retentionDays": 30
+  }
+}

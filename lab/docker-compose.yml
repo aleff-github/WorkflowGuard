@@ -1,0 +1,10 @@
+services:
+  juice-shop:
+    image: bkimminich/juice-shop@sha256:b3450d951d98b607805b21a4b9b4da7451b334c804ad93a79fcee490b3a7c5ad
+    ports:
+      - "127.0.0.1:3000:3000"
+    restart: "no"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

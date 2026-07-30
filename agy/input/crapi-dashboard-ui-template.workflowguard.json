@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": 1785406800,
+  "secretsIncluded": false,
+  "workflow": {
+    "id": "9a61ee78-c497-4f9f-8f37-2353e3e8ac46",
+    "name": "crAPI - authenticated dashboard identity",
+    "steps": [
+      {
+        "id": "5d6423e0-349d-45f0-b4fc-790508cb704b",
+        "name": "S1 - GET own dashboard as crAPI D",
+        "method": "GET",
+        "url": "http://127.0.0.1:8888/identity/api/v2/user/dashboard",
+        "rawRequest": "GET /identity/api/v2/user/dashboard HTTP/1.1\r\nAuthorization: <redacted>\r\nUser-Agent: WorkflowGuard-UI-Validation/1.0\r\nAccept: application/json\r\nHost: 127.0.0.1:8888\r\nConnection: keep-alive\r\n\r\n",
+        "category": "READ",
+        "role": "ACTION",
+        "actorId": "8c2f25b6-60fc-4e02-9580-95e2a6588554",
+        "enabled": true,
+        "inScope": false
+      },
+      {
+        "id": "b42ac070-7a90-4536-a66d-7f31ea7409da",
+        "name": "S2 - Probe crAPI C dashboard",
+        "method": "GET",
+        "url": "http://127.0.0.1:8888/identity/api/v2/user/dashboard",
+        "rawRequest": "GET /identity/api/v2/user/dashboard HTTP/1.1\r\nAuthorization: <redacted>\r\nUser-Agent: WorkflowGuard-UI-Validation/1.0\r\nAccept: application/json\r\nHost: 127.0.0.1:8888\r\nConnection: keep-alive\r\n\r\n",
+        "category": "READ",
+        "role": "PROBE",
+        "actorId": "69d11d3e-4331-46be-b3ac-fb968c29b38b",
+        "enabled": true,
+        "inScope": false
+      }
+    ],
+    "actors": [
+      {
+        "id": "6609d8c9-5d4c-304d-bdda-df24313be5cc",
+        "name": "Default actor",
+        "initialCookieHeader": "",
+        "initialAuthorizationHeader": "",
+        "seedFromCapturedRequest": true
+      },
+      {
+        "id": "69d11d3e-4331-46be-b3ac-fb968c29b38b",
+        "name": "crAPI C",
+        "initialCookieHeader": "",
+        "initialAuthorizationHeader": "<redacted>",
+        "seedFromCapturedRequest": false
+      },
+      {
+        "id": "8c2f25b6-60fc-4e02-9580-95e2a6588554",
+        "name": "crAPI D",
+        "initialCookieHeader": "",
+        "initialAuthorizationHeader": "<redacted>",
+        "seedFromCapturedRequest": false
+      }
+    ],
+    "variables": [],
+    "invariants": [
+      {
+        "id": "c72021f1-0f8a-49e1-9bbb-88404c267bd5",
+        "probeStepId": "b42ac070-7a90-4536-a66d-7f31ea7409da",
+        "invariant": {
+          "name": "crAPI C dashboard identity remains bound",
+          "jsonPointer": "/id",
+          "rule": "UNCHANGED",
+          "expectedJson": null
+        }
+      }
+    ],
+    "volatileJsonPointers": [],
+    "createdAt": 1785406800
+  }
+}

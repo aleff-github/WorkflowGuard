@@ -1,0 +1,27 @@
+{
+  "reviewer": "agy",
+  "engagementId": "workflowguard-local-owasp-lab-2026",
+  "scopeConsistent": true,
+  "safetyConsistent": true,
+  "uiExecutionComplete": true,
+  "workflowGuardAssessmentMeaning": "WorkflowGuard VERIFIED indicates replay execution completed and configured probe invariants passed; it does not guarantee target application security.",
+  "juiceBasketInvariant": "VIOLATED",
+  "crapiDashboardInvariant": "PASSED",
+  "crapiVehicleLocationInvariant": "INCONCLUSIVE",
+  "privacyFinding": "PASSED",
+  "securityFinding": "VIOLATED",
+  "confidence": "HIGH",
+  "observations": [
+    "Scope was loopback-only.",
+    "Replay methods were read-only, execution was sequential, and no state-changing request was executed.",
+    "All ten campaign UI cases were executed and completed.",
+    "Juice Shop basket evidence is consistent with a candidate horizontal-authorization violation.",
+    "crAPI dashboard identity binding passed.",
+    "Post-fix UI evidence contains neither live Authorization values nor response e-mail values."
+  ],
+  "limitations": [
+    "crAPI vehicle location remains inconclusive because the laboratory accounts lack vehicle objects.",
+    "The review was restricted to sanitized offline evidence."
+  ],
+  "disposition": "NEEDS_MANUAL_REVIEW"
+}

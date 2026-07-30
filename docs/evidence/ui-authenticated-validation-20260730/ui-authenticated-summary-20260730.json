@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Sanitized authenticated WorkflowGuard UI validation summary",
+  "generatedAtUtc": "2026-07-30T10:40:00Z",
+  "engagementId": "workflowguard-local-owasp-lab-2026",
+  "scope": {
+    "origins": [
+      "http://127.0.0.1:3000",
+      "http://127.0.0.1:8888"
+    ],
+    "loopbackOnly": true,
+    "methodsUsedForWorkflowReplays": [
+      "GET"
+    ],
+    "stateChangingRequests": 0,
+    "concurrency": 1
+  },
+  "uiExecution": {
+    "interface": "WorkflowGuard Burp tab",
+    "generatedCaseCount": 10,
+    "executedCaseCount": 10,
+    "completedCaseCount": 10,
+    "failedCaseCount": 0,
+    "probeCheckCount": 10,
+    "probeViolationCount": 0,
+    "cleanupViolationCount": 0
+  },
+  "workflows": [
+    {
+      "name": "Juice Shop catalog consistency",
+      "generatedCases": 3,
+      "executedCases": 3,
+      "result": "COMPLETED",
+      "assessment": "VERIFIED"
+    },
+    {
+      "name": "Juice Shop authenticated basket isolation",
+      "generatedCases": 4,
+      "executedCases": 4,
+      "result": "COMPLETED",
+      "assessment": "VERIFIED",
+      "authenticatedActorSwapStatus": 200,
+      "anonymousControlStatus": 401,
+      "probeInvariant": "UNCHANGED",
+      "targetSecurityAssessment": "CANDIDATE_VIOLATION",
+      "supportingActorPairs": [
+        "A/B",
+        "C/D"
+      ]
+    },
+    {
+      "name": "crAPI authenticated dashboard identity",
+      "generatedCases": 3,
+      "executedCases": 3,
+      "result": "COMPLETED",
+      "assessment": "VERIFIED",
+      "authenticatedActorSwapStatus": 200,
+      "anonymousControlResult": "REJECTED",
+      "probeInvariant": "UNCHANGED",
+      "targetSecurityAssessment": "PASS",
+      "supportingActorPairs": [
+        "A/B",
+        "C/D"
+      ]
+    }
+  ],
+  "targetConclusions": {
+    "juiceBasketIsolation": "CANDIDATE_VIOLATION",
+    "crapiDashboardIdentityBinding": "PASS",
+    "crapiVehicleLocationIsolation": "INCONCLUSIVE",
+    "crapiVehicleLocationLimitation": "All supplied laboratory accounts lack the required vehicle objects."
+  },
+  "interpretationBoundary": {
+    "workflowGuardVerifiedMeaning": "The replay completed and its configured probe invariant passed.",
+    "workflowGuardVerifiedDoesNotMean": "The target is free of authorization defects.",
+    "targetFindingBasis": "Actor-isolation evidence is evaluated independently from WorkflowGuard run completion."
+  },
+  "privacyObservation": {
+    "authorizationHeadersRedacted": true,
+    "credentialsRetained": false,
+    "responsePiiPresentInOriginalUiEvidence": true,
+    "responseEmailPresentInPostfixUiEvidence": false,
+    "liveAuthorizationPresentInPostfixUiEvidence": false,
+    "privacyHardeningImplemented": true,
+    "postfixUiReplayCompleted": true,
+    "postfixUiProbePassed": true,
+    "thisSummaryContainsResponsePii": false,
+    "recommendedDisposition": "VERIFIED"
+  }
+}

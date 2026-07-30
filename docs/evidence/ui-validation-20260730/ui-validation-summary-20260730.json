@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "validationDate": "2026-07-30",
+  "application": {
+    "name": "WorkflowGuard",
+    "version": "0.3.0",
+    "jar": "build/libs/workflowguard-0.3.0.jar",
+    "jarBytes": 2705430,
+    "jarSha256": "4930FD2D72F91378B1AAF410CFE28B22A80D5028D0A02A851FB7D352D33765E7"
+  },
+  "environment": {
+    "host": "Windows",
+    "burpEdition": "Community",
+    "burpVersion": "2026.7.1",
+    "target": "http://127.0.0.1:3000",
+    "targetApplication": "OWASP Juice Shop",
+    "trafficPolicy": "UI campaign used GET requests only"
+  },
+  "workflow": {
+    "name": "Juice Shop - catalog consistency",
+    "steps": 2,
+    "actors": 2,
+    "variables": 1,
+    "invariants": 1,
+    "portableArtifact": "juice-shop-catalog-ui-postfix.workflowguard.json",
+    "portableArtifactBytes": 2649,
+    "portableArtifactSha256": "2D19580CA2FFE44B3C1B4213B80B7366C525E7BBD0FBFEE3278DF0ECF88A5153",
+    "secretsIncluded": false
+  },
+  "uiCases": [
+    {
+      "name": "Repeat S3 catalog lookup",
+      "type": "REPEAT_STEP",
+      "status": "COMPLETED",
+      "mutationHttpStatuses": [200, 200],
+      "passedInvariantChecks": 1,
+      "mutationViolations": 0,
+      "cleanupViolations": 0,
+      "assessment": "VERIFIED",
+      "durationMilliseconds": 4512
+    },
+    {
+      "name": "Run S3 as Authenticated shopper",
+      "type": "SWAP_ACTOR",
+      "status": "COMPLETED",
+      "mutationHttpStatuses": [200],
+      "passedInvariantChecks": 1,
+      "mutationViolations": 0,
+      "cleanupViolations": 0,
+      "assessment": "VERIFIED",
+      "durationMilliseconds": 3350
+    },
+    {
+      "name": "Use stale productName",
+      "type": "STALE_VARIABLE",
+      "status": "COMPLETED",
+      "mutationHttpStatuses": [200],
+      "passedInvariantChecks": 1,
+      "mutationViolations": 0,
+      "cleanupViolations": 0,
+      "assessment": "VERIFIED",
+      "durationMilliseconds": 3350
+    }
+  ],
+  "lastRunEvidence": {
+    "artifact": "juice-shop-ui-evidence-20260730.json",
+    "artifactBytes": 5521,
+    "artifactSha256": "0D1AB9ADB52C88BEEBB3D541D31F836041587F741FB93F9832640398A98F6CD7",
+    "status": "COMPLETED",
+    "assessment": "VERIFIED",
+    "httpStatuses": [200, 200, 200],
+    "passedInvariantChecks": 1,
+    "mutationViolations": 0,
+    "cleanupViolations": 0,
+    "redactionApplied": true,
+    "authorizationHeaderPresent": false,
+    "bearerPatternPresent": false
+  },
+  "lineEndingRegression": {
+    "legacyImportedAction": {
+      "crlfDelimiters": 0,
+      "bareLfDelimiters": 7
+    },
+    "postUiSaveAction": {
+      "crlfDelimiters": 7,
+      "bareLfDelimiters": 0
+    },
+    "untouchedLegacyReplayHttpStatuses": [200, 200, 200, 200],
+    "fixedAtUiSaveBoundary": true,
+    "fixedAtMontoyaSendBoundary": true
+  },
+  "safety": {
+    "stateChangingCategoryTested": "UPDATE",
+    "confirmationDisplayed": true,
+    "runCancelled": true,
+    "stateChangingRequestsSent": 0
+  },
+  "automatedTests": {
+    "tests": 65,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "defaultSkippedTest": "RealLabActorAuthorizationIntegrationTest is environment-gated",
+    "realLabAuthorizationIntegrationRunSeparately": "PASSED"
+  },
+  "screenshotsDirectory": "docs/screenshots/ui-validation-20260730/selected",
+  "curatedScreenshots": [
+    "01-lab-traffic.png",
+    "02-capture-context-menu.png",
+    "03-imported-workflow.png",
+    "04-actor-authorization-redacted.png",
+    "05-dependency-graph.png",
+    "06-variable-template.png",
+    "07-generated-cases.png",
+    "08-result-matrix.png",
+    "09-http-evidence.png",
+    "10-invariant-evidence.png",
+    "11-state-change-confirmation.png",
+    "12-export-redaction.png"
+  ]
+}

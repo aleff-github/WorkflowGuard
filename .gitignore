@@ -1,0 +1,19 @@
+.gradle/
+build/
+out/
+.idea/
+*.iml
+.vscode/
+*.log
+
+# Local design transcript supplied as project context.
+workflowguard-conversazione.zip
+
+# Local authorized-testing engagement and generated AGY evidence.
+agy/engagements/active.json
+agy/output/
+
+# Disposable, loopback-only OWASP test lab and local identity references.
+.workflowguard-lab/
+lab/identities.local.json
+lab/evidence/

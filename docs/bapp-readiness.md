@@ -1,0 +1,72 @@
+# BApp Store publication readiness
+
+Assessment date: 2026-07-31
+
+PortSwigger criteria revision checked: 2026-07-28
+
+## Verdict
+
+WorkflowGuard `0.3.3` satisfies the current technical BApp Store acceptance
+criteria. It is ready to be exposed as a public release candidate for
+PortSwigger review.
+
+Submission is intentionally not complete yet. The repository remains private,
+and the repository owner must personally accept the legal confirmations in
+PortSwigger's extension-portal issue form.
+
+## Acceptance-criteria matrix
+
+| # | PortSwigger criterion | WorkflowGuard evidence | Status |
+| --- | --- | --- | --- |
+| 1 | Unique function | Generates controlled multi-step state mutations and evaluates explicit probes, invariants, and cleanup; this differs from request-matrix, sequence-comparison, and endpoint-organization BApps. | Pass |
+| 2 | Clear name and description | `WorkflowGuard`, one-line summary, detailed overview, features, and usage text are prepared in [bapp-submission.md](bapp-submission.md). | Pass |
+| 3 | Secure operation | Untrusted request messages are validated before storage and again after rendering. The modeled method, raw method, effective target, Host, scope, request count, origin-bound credentials, extracted values, and state-change confirmation are all enforced. | Pass |
+| 4 | All dependencies included | Jackson and RE2/J runtime dependencies, project license, third-party notices, and dependency licenses are embedded in the release JAR. Montoya remains `compileOnly` because Burp provides it. | Pass |
+| 5 | Background threads and error reporting | Replay uses a single background executor; completion returns to the Swing event thread; unexpected failures are written to Burp's extension error stream. | Pass |
+| 6 | Clean unload | An unloading handler closes the tab runtime, removes the workflow listener, and calls `shutdownNow()` on the execution executor; Burp removes the API registrations it owns. | Pass |
+| 7 | Burp networking | Target requests use Montoya `Http.sendRequest()`; the extension does not use a separate HTTP client. | Pass |
+| 8 | Offline operation | No telemetry, cloud service, online definitions, or external runtime service is required. | Pass |
+| 9 | Large-project behavior | Only explicitly selected requests are mapped; the extension never enumerates full Proxy history or Site map data. Imports, responses, generated cases, request counts, visible run history, and retained full HTTP evidence are bounded. | Pass |
+| 10 | Parent GUI elements | Dialogs and file choosers use `SwingUtils.suiteFrame()` supplied by the Burp bootstrap; a unit test covers the injected parent. | Pass |
+| 11 | Montoya API artifact | Gradle references `net.portswigger.burp.extensions:montoya-api:2026.7`; the provided API classes are absent from the JAR. | Pass |
+| 12 | Burp AI default provider | Not applicable: WorkflowGuard has no AI functionality or third-party AI provider. | N/A |
+
+## Release evidence
+
+- Clean JDK 21 build:
+  `.\gradlew.bat clean test jar --no-daemon --rerun-tasks`.
+- Automated baseline: **88 tests**, zero failures, zero errors, one opt-in
+  credential-dependent laboratory test skipped, across 26 test suites.
+- Burp Suite Community Edition `2026.7.1`: direct `0.3.3` UI validation
+  confirmed load, portable workflow import, mutation generation, unsafe raw
+  method rejection, out-of-scope execution blocking, credential-storage
+  disclosure, and portable-export disclosure.
+- The earlier full Community campaign additionally covered authorized
+  loopback execution, invariant failure, cleanup verification, evidence export,
+  issue submission behavior, and unload/reload.
+- Release JAR: `workflowguard-0.3.3.jar`, **2,852,241 bytes**.
+- SHA-256:
+  `8FB9CD29EC79CE5B9489A55F7BCAC321393E7B4426CE63BD84A0B9E5D29955DD`.
+- JAR inventory: 1,446 entries, no duplicate entries, no bundled Montoya
+  classes, and all expected project/dependency notices present.
+- Full reachable Git history and publishable files: zero Gitleaks findings.
+- OSV query for all bundled runtime components: zero known vulnerabilities on
+  the assessment date.
+- Curated screenshots: 28 files, no exact duplicates, reviewed for account
+  details, credentials, local desktop content, tokens, and cookies.
+
+The exact final verification commands and UI observations are recorded in
+[community-validation-20260731.md](community-validation-20260731.md).
+
+## Submission fields
+
+The current PortSwigger submission process requires an accessible GitHub
+repository containing the relevant source, a clear name and description,
+usage/setup information, and a new extension-submission issue. Ready-to-paste
+values are in [bapp-submission.md](bapp-submission.md).
+
+Official references:
+
+- [BApp Store acceptance criteria](https://portswigger.net/burp/documentation/desktop/extend-burp/extensions/creating/bapp-store-acceptance-criteria)
+- [Submitting extensions](https://portswigger.net/burp/documentation/desktop/extend-burp/extensions/creating/bapp-store-submitting-extensions)
+- [Extension submission portal](https://github.com/PortSwigger/extension-portal/issues/new/choose)

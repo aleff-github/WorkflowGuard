@@ -1,0 +1,65 @@
+{
+  "schemaVersion" : 1,
+  "exportedAt" : 1785404220.179642300,
+  "secretsIncluded" : false,
+  "workflow" : {
+    "id" : "745d6a40-7990-4fa1-9515-6a4fe534c903",
+    "name" : "Juice Shop - catalog consistency",
+    "steps" : [ {
+      "id" : "3c9480e1-bd2c-4af0-9302-c05b11f64fa9",
+      "name" : "S1 — GET /rest/products/search?q=banana",
+      "method" : "GET",
+      "url" : "http://127.0.0.1:3000/rest/products/search?q=banana",
+      "rawRequest" : "GET /rest/products/search?q=banana HTTP/1.1\r\nHost: 127.0.0.1:3000\r\nUser-Agent: curl/8.21.0\r\nAccept: */*\r\nX-WorkflowGuard-UI-Seed: curl-20260730\r\nConnection: keep-alive\r\n\r\n",
+      "category" : "READ",
+      "role" : "PROBE",
+      "actorId" : "6609d8c9-5d4c-304d-bdda-df24313be5cc",
+      "enabled" : true,
+      "inScope" : false
+    }, {
+      "id" : "46d43197-d494-4eda-9bc4-39dc499f52cd",
+      "name" : "S3 — GET /rest/products/search?q=6",
+      "method" : "GET",
+      "url" : "http://127.0.0.1:3000/rest/products/search?q=6",
+      "rawRequest" : "GET /rest/products/search?q=${productName} HTTP/1.1\r\nHost: 127.0.0.1:3000\r\nUser-Agent: WorkflowGuard-UI-Validation/2026.07\r\nAccept: */*\r\nX-WorkflowGuard-Scenario: catalog-consistency\r\nConnection: keep-alive\r\n\r\n",
+      "category" : "READ",
+      "role" : "ACTION",
+      "actorId" : "6609d8c9-5d4c-304d-bdda-df24313be5cc",
+      "enabled" : true,
+      "inScope" : false
+    } ],
+    "actors" : [ {
+      "id" : "6609d8c9-5d4c-304d-bdda-df24313be5cc",
+      "name" : "Default actor",
+      "initialCookieHeader" : "",
+      "initialAuthorizationHeader" : "",
+      "seedFromCapturedRequest" : true
+    }, {
+      "id" : "e339d272-001c-4213-ab08-11f5812c9810",
+      "name" : "Authenticated shopper",
+      "initialCookieHeader" : "",
+      "initialAuthorizationHeader" : "",
+      "seedFromCapturedRequest" : false
+    } ],
+    "variables" : [ {
+      "name" : "productName",
+      "sourceStepId" : "3c9480e1-bd2c-4af0-9302-c05b11f64fa9",
+      "extractionType" : "REGEX",
+      "expression" : "\"name\":\"([A-Za-z]+)",
+      "captureGroup" : 1,
+      "staleValue" : "definitely-missing"
+    } ],
+    "invariants" : [ {
+      "id" : "deba1a1c-d377-4fe3-9d2c-1388c3b7f967",
+      "probeStepId" : "3c9480e1-bd2c-4af0-9302-c05b11f64fa9",
+      "invariant" : {
+        "name" : "Catalog search returns selected product",
+        "jsonPointer" : "/data/0/id",
+        "rule" : "EQUALS",
+        "expectedJson" : "6"
+      }
+    } ],
+    "volatileJsonPointers" : [ "/data/createdAt", "/data/updatedAt" ],
+    "createdAt" : 1785400254.467570100
+  }
+}
