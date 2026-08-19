@@ -12,7 +12,7 @@ repositories {
 dependencies {
     compileOnly("net.portswigger.burp.extensions:montoya-api:2026.7")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.2")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.22.1")
     implementation("com.google.re2j:re2j:1.8")
 
