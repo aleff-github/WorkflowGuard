@@ -48,6 +48,10 @@ viewer and persistent project files are Professional-only.
   invariants.
 - AuthMatrix compares requests across users and roles; WorkflowGuard maintains
   isolated per-origin actor sessions across complete multi-step flows.
+- Autorize and Auth Analyzer automatically replay requests with alternate
+  credentials and classify authorization outcomes; WorkflowGuard instead
+  mutates complete captured sequences and evaluates explicit before/after state
+  invariants, lifecycle ordering, stale values, and verified cleanup.
 - API Workflow Manager organizes endpoints; WorkflowGuard models action, probe,
   and cleanup roles, resolves dynamic variables, and verifies resulting state.
 
