@@ -130,6 +130,7 @@ See [Development workflow](docs/development.md),
 [BApp readiness matrix](docs/bapp-readiness.md),
 [BApp submission text](docs/bapp-submission.md),
 [0.3.3 release notes](docs/release-notes-0.3.3.md),
+[release integrity process](docs/release-integrity.md),
 [Invariant language](docs/invariants.md),
 [Workflow files](docs/workflow-files.md), [Architecture](docs/architecture.md),
 [Roadmap](docs/roadmap.md), and [Contributing](CONTRIBUTING.md) for the
