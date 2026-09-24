@@ -1,0 +1,104 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Java
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@90ddb51e90a5fd9ba75f40cf85156b7b41bf76a3 # v6
+
+      - name: Validate tag and project version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          project_version="$(./gradlew properties --no-daemon -q | awk -F': ' '$1 == "version" { print $2 }')"
+          tag_version="${GITHUB_REF_NAME#v}"
+          if [[ -z "$project_version" || "$project_version" != "$tag_version" ]]; then
+            echo "Tag version '$tag_version' does not match Gradle project version '$project_version'." >&2
+            exit 1
+          fi
+          echo "version=$tag_version" >> "$GITHUB_OUTPUT"
+
+      - name: Build and test release
+        run: ./gradlew clean test jar --no-daemon
+
+      - name: Verify and stage release artifacts
+        id: artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t jars < <(find build/libs -maxdepth 1 -type f -name 'workflowguard-*.jar' -print)
+          if [[ ${#jars[@]} -ne 1 ]]; then
+            echo "Expected exactly one WorkflowGuard JAR, found ${#jars[@]}" >&2
+            exit 1
+          fi
+
+          jar_path="${jars[0]}"
+          if jar tf "$jar_path" | grep -q '^burp/api/montoya/'; then
+            echo "The distributable JAR must not bundle Montoya API classes." >&2
+            exit 1
+          fi
+
+          duplicates="$(jar tf "$jar_path" | sort | uniq -d)"
+          if [[ -n "$duplicates" ]]; then
+            echo "Duplicate JAR entries detected:" >&2
+            echo "$duplicates" >&2
+            exit 1
+          fi
+
+          mkdir -p dist
+          cp "$jar_path" dist/
+          jar_name="$(basename "$jar_path")"
+          (
+            cd dist
+            sha256sum "$jar_name" > "$jar_name.sha256"
+            sha256sum -c "$jar_name.sha256"
+          )
+
+          notes_path="docs/release-notes-${{ steps.version.outputs.version }}.md"
+          if [[ ! -f "$notes_path" ]]; then
+            echo "Missing release notes: $notes_path" >&2
+            exit 1
+          fi
+          echo "notes_path=$notes_path" >> "$GITHUB_OUTPUT"
+
+      - name: Upload verified workflow artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: workflowguard-release-${{ steps.version.outputs.version }}
+          path: dist/
+          if-no-files-found: error
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTES_PATH: ${{ steps.artifacts.outputs.notes_path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release $GITHUB_REF_NAME already exists; refusing to overwrite it." >&2
+            exit 1
+          fi
+
+          gh release create "$GITHUB_REF_NAME" dist/*             --verify-tag             --title "WorkflowGuard ${{ steps.version.outputs.version }}"             --notes-file "$NOTES_PATH"
