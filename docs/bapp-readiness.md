@@ -18,7 +18,7 @@ extension-portal issue form.
 
 | # | PortSwigger criterion | WorkflowGuard evidence | Status |
 | --- | --- | --- | --- |
-| 1 | Unique function | Generates controlled multi-step state mutations and evaluates explicit probes, invariants, and cleanup; this differs from request-matrix, sequence-comparison, and endpoint-organization BApps. | Pass |
+| 1 | Unique function | Generates controlled multi-step state mutations and evaluates explicit probes, invariants, and cleanup; this differs from Sequence Comparer, AuthMatrix, Autorize, Auth Analyzer, and API Workflow Manager, which focus on comparison, authorization replay, or endpoint organization rather than mutation of complete stateful workflows with explicit before/after state assertions. | Pass |
 | 2 | Clear name and description | `WorkflowGuard`, one-line summary, detailed overview, features, and usage text are prepared in [bapp-submission.md](bapp-submission.md). | Pass |
 | 3 | Secure operation | Untrusted request messages are validated before storage and again after rendering. The modeled method, raw method, effective target, Host, scope, request count, origin-bound credentials, extracted values, and state-change confirmation are all enforced. | Pass |
 | 4 | All dependencies included | Jackson and RE2/J runtime dependencies, project license, third-party notices, and dependency licenses are embedded in the release JAR. Montoya remains `compileOnly` because Burp provides it. | Pass |
