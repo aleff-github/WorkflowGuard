@@ -8,6 +8,7 @@ on:
       - build.gradle.kts
 
 permissions:
+  actions: write
   contents: write
 
 jobs:
@@ -23,6 +24,8 @@ jobs:
 
       - name: Create release tag for a version bump
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
 
@@ -60,10 +63,17 @@ jobs:
               exit 1
             fi
             echo "Tag $tag already points to this release commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "$tag" -m "WorkflowGuard $current_version" "$GITHUB_SHA"
+            git push origin "$tag"
+          fi
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists; nothing to dispatch."
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "$tag" -m "WorkflowGuard $current_version" "$GITHUB_SHA"
-          git push origin "$tag"
+          gh workflow run release.yml --ref "$tag"
+          echo "Dispatched release.yml for $tag."
