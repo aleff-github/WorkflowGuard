@@ -1,0 +1,79 @@
+name: Tag release version
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - build.gradle.kts
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Create release tag for a version bump
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          version_from_file() {
+            sed -nE 's/^version = "([^"]+)"$/\1/p' "$1" | head -n 1
+          }
+
+          current_version="$(version_from_file build.gradle.kts)"
+          if [[ -z "$current_version" ]]; then
+            echo "Unable to read the project version from build.gradle.kts." >&2
+            exit 1
+          fi
+
+          previous_version=""
+          if git rev-parse "${GITHUB_SHA}^" >/dev/null 2>&1; then
+            previous_file="$(mktemp)"
+            if git show "${GITHUB_SHA}^:build.gradle.kts" > "$previous_file" 2>/dev/null; then
+              previous_version="$(version_from_file "$previous_file")"
+            fi
+            rm -f "$previous_file"
+          fi
+
+          if [[ "$previous_version" == "$current_version" ]]; then
+            echo "Project version did not change ($current_version); no release tag needed."
+            exit 0
+          fi
+
+          tag="v$current_version"
+          git fetch --tags --force
+
+          if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+            existing_commit="$(git rev-list -n 1 "$tag")"
+            if [[ "$existing_commit" != "$GITHUB_SHA" ]]; then
+              echo "Tag $tag already exists at $existing_commit, not $GITHUB_SHA." >&2
+              exit 1
+            fi
+            echo "Tag $tag already points to this release commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "$tag" -m "WorkflowGuard $current_version" "$GITHUB_SHA"
+            git push origin "$tag"
+          fi
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists; nothing to dispatch."
+            exit 0
+          fi
+
+          gh workflow run release.yml --ref "$tag"
+          echo "Dispatched release.yml for $tag."

@@ -6,7 +6,7 @@ PortSwigger criteria revision checked: 2026-09-22
 
 ## Verdict
 
-WorkflowGuard `0.3.3` continues to satisfy the current technical BApp Store
+WorkflowGuard `0.3.4` continues to satisfy the current technical BApp Store
 acceptance criteria. The source repository is public and suitable for
 PortSwigger review.
 
@@ -35,7 +35,7 @@ extension-portal issue form.
 
 - Clean JDK 21 build:
   `.\gradlew.bat clean test jar --no-daemon --rerun-tasks`.
-- Automated baseline: **88 tests**, zero failures, zero errors, one opt-in
+- Automated baseline for the release line: **88 tests**, zero failures, zero errors, one opt-in
   credential-dependent laboratory test skipped, across 26 test suites.
 - Burp Suite Community Edition `2026.7.1`: direct `0.3.3` UI validation
   confirmed load, portable workflow import, mutation generation, unsafe raw
@@ -70,8 +70,10 @@ The exact final verification commands and UI observations are recorded in
 - Maven Central currently lists Montoya API `2026.7`, which remains the
   compile-time API used by WorkflowGuard.
 - Direct runtime/UI validation evidence in this repository remains against
-  Burp Suite Community Edition `2026.7.1`. This document does not claim a
-  completed direct `2026.9` regression campaign.
+  Burp Suite Community Edition `2026.7.1` from the `0.3.3` campaign. Version
+  `0.3.4` changes dependency/release hardening and documentation, not the
+  workflow execution semantics. This document does not claim a completed direct
+  `2026.9` regression campaign.
 
 ## Submission fields
 

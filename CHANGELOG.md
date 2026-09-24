@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.4 - 2026-09-24
 
 ### Security
 
@@ -11,8 +11,9 @@
 
 ### Changed
 
-- Add a tag-driven release workflow that requires the tag version to match the
-  Gradle project version and publishes the same verified JAR/checksum pair.
+- Add automatic annotated release tagging for version bumps on `main` plus a
+  tag-driven release workflow that requires the tag version to match the Gradle
+  project version and publishes the same verified JAR/checksum pair.
 - Document the `0.3.3` validation-build versus release-asset checksum
   discrepancy so historical evidence is not mistaken for the attached binary.
 - Refresh the BApp Store readiness review against PortSwigger's

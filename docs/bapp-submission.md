@@ -13,7 +13,7 @@ cleanup.
 ## Current extension-portal form
 
 - **Extension URL:** `https://github.com/aleff-github/WorkflowGuard`
-- **Version number:** `0.3.3`
+- **Version number:** `0.3.4`
 - **Additional compatible products and features:** select **Community** only.
   Professional is included automatically; WorkflowGuard does not claim DAST or
   Burp AI integration.
@@ -58,7 +58,7 @@ viewer and persistent project files are Professional-only.
 ## Installation
 
 1. Build with `./gradlew clean test jar`, or install the published BApp.
-2. For a manual build, load `build/libs/workflowguard-0.3.3.jar` as a Java
+2. For a manual build, load `build/libs/workflowguard-0.3.4.jar` as a Java
    extension under **Extensions → Installed**.
 3. Open the **WorkflowGuard** suite tab.
 
@@ -79,7 +79,7 @@ systems they own or are authorized to assess.
 
 - Java 21
 - Montoya API `2026.7`
-- Validated with Burp Suite Community Edition `2026.7.1`
+- Runtime/UI behavior validated with Burp Suite Community Edition `2026.7.1` during the `0.3.3` campaign; `0.3.4` contains release/security hardening with no intended workflow-execution behavior changes
 - Dependencies bundled in the release JAR
 - GPL-3.0-only
 - Offline operation; no telemetry or cloud dependency
