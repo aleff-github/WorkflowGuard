@@ -13,8 +13,10 @@ the release notes all refer to the same build.
    `.github/workflows/tag-release.yml`, which creates the annotated
    `vX.Y.Z` tag at that exact release commit.
 4. Do not create the GitHub release manually.
-5. The tag triggers `.github/workflows/release.yml`, which builds, tests,
-   verifies, checksums, and publishes the release artifacts.
+5. The tag workflow explicitly dispatches `.github/workflows/release.yml`
+   after creating the tag. Manually pushed release tags can also trigger the
+   release workflow directly. The release workflow builds, tests, verifies,
+   checksums, and publishes the release artifacts.
 6. Download the published JAR and `.sha256` file and verify them independently
    before submitting or updating the BApp Store entry.
 
