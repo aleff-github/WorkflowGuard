@@ -17,6 +17,8 @@ workflow-execution semantics validated in the `0.3.3` campaign.
 - Reject a build if Montoya API classes are accidentally bundled.
 - Reject duplicate JAR entries.
 - Generate and verify a SHA-256 file from the exact built artifact.
+- Add automatic annotated tagging when the Gradle project version changes on
+  `main`.
 - Add a tag-driven release workflow that requires the Git tag and Gradle
   project version to match.
 - Publish the same verified JAR/checksum pair produced by the release workflow.
