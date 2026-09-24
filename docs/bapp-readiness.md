@@ -1,18 +1,18 @@
 # BApp Store publication readiness
 
-Assessment date: 2026-07-31
+Assessment date: 2026-09-24
 
-PortSwigger criteria revision checked: 2026-07-28
+PortSwigger criteria revision checked: 2026-09-22
 
 ## Verdict
 
-WorkflowGuard `0.3.3` satisfies the current technical BApp Store acceptance
-criteria. It is ready to be exposed as a public release candidate for
+WorkflowGuard `0.3.3` continues to satisfy the current technical BApp Store
+acceptance criteria. The source repository is public and suitable for
 PortSwigger review.
 
-Submission is intentionally not complete yet. The repository remains private,
-and the repository owner must personally accept the legal confirmations in
-PortSwigger's extension-portal issue form.
+Submission is not recorded as complete in this repository. The repository owner
+must personally accept the legal confirmations in PortSwigger's
+extension-portal issue form.
 
 ## Acceptance-criteria matrix
 
@@ -44,11 +44,14 @@ PortSwigger's extension-portal issue form.
 - The earlier full Community campaign additionally covered authorized
   loopback execution, invariant failure, cleanup verification, evidence export,
   issue submission behavior, and unload/reload.
-- Release JAR: `workflowguard-0.3.3.jar`, **2,852,241 bytes**.
-- SHA-256:
+- The 2026-07-31 validation build recorded a JAR size of **2,852,241 bytes**
+  and SHA-256
   `8FB9CD29EC79CE5B9489A55F7BCAC321393E7B4426CE63BD84A0B9E5D29955DD`.
-- JAR inventory: 1,446 entries, no duplicate entries, no bundled Montoya
-  classes, and all expected project/dependency notices present.
+  The binary currently attached to the GitHub `v0.3.3` release is a different
+  build; see [release integrity](release-integrity.md) before using a checksum
+  for verification.
+- The validated JAR inventory contained 1,446 entries, no duplicate entries,
+  no bundled Montoya classes, and all expected project/dependency notices.
 - Full reachable Git history and publishable files: zero Gitleaks findings.
 - OSV query for all bundled runtime components: zero known vulnerabilities on
   the assessment date.
@@ -57,6 +60,18 @@ PortSwigger's extension-portal issue form.
 
 The exact final verification commands and UI observations are recorded in
 [community-validation-20260731.md](community-validation-20260731.md).
+
+## Compatibility freshness
+
+- PortSwigger's BApp Store acceptance criteria and submission guidance were
+  rechecked on 2026-09-24 against documentation updated 2026-09-22.
+- The latest Burp Suite Professional / Community release at this review is
+  `2026.9`, published 2026-09-21.
+- Maven Central currently lists Montoya API `2026.7`, which remains the
+  compile-time API used by WorkflowGuard.
+- Direct runtime/UI validation evidence in this repository remains against
+  Burp Suite Community Edition `2026.7.1`. This document does not claim a
+  completed direct `2026.9` regression campaign.
 
 ## Submission fields
 
