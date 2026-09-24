@@ -40,10 +40,12 @@ Burp Suite workflow mutation extension.
 - Gitleaks: zero findings in reachable history and publishable files.
 - OSV runtime-dependency query: zero known vulnerabilities on 2026-07-31.
 
-- Artifact: `workflowguard-0.3.3.jar`
-- Size: 2,852,241 bytes
-- SHA-256:
-  `8FB9CD29EC79CE5B9489A55F7BCAC321393E7B4426CE63BD84A0B9E5D29955DD`
+The validation build used for the 2026-07-31 campaign had size 2,852,241 bytes
+and SHA-256
+`8FB9CD29EC79CE5B9489A55F7BCAC321393E7B4426CE63BD84A0B9E5D29955DD`.
+The binary later attached to the GitHub `v0.3.3` release is not byte-identical
+to that validation build. See [release integrity](release-integrity.md) for the
+current release-asset digest and the corrected verification guidance.
 
 See the [README](../README.md), [Community validation
 report](community-validation-20260731.md), and [BApp readiness
