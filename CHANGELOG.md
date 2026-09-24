@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased
+
+### Security
+
+- Update Jackson Databind and the aligned Jackson runtime components to
+  `2.22.3`, which includes fixes for CVE-2026-91776 and CVE-2026-91777.
+- Verify the distributable JAR in CI, reject bundled Montoya API classes and
+  duplicate entries, and generate a SHA-256 file from the exact artifact.
+
+### Changed
+
+- Add a tag-driven release workflow that requires the tag version to match the
+  Gradle project version and publishes the same verified JAR/checksum pair.
+- Document the `0.3.3` validation-build versus release-asset checksum
+  discrepancy so historical evidence is not mistaken for the attached binary.
+- Refresh the BApp Store readiness review against PortSwigger's
+  2026-09-22 acceptance criteria.
+
 ## 0.3.3 - 2026-07-31
 
 ### Security
