@@ -3,7 +3,7 @@
 WorkflowGuard is a state-aware workflow mutation engine for Burp Suite. It captures a legitimate multi-step HTTP process, generates controlled out-of-order variants, and is designed to detect business-logic violations by comparing application state before and after execution.
 
 > [!IMPORTANT]
-> The repository contains the complete `0.3.3` local MVP described in the roadmap. The intentionally excluded items remain listed under **Explicitly out of the MVP** in the roadmap.
+> The repository contains the complete `0.3.4` local MVP described in the roadmap. The intentionally excluded items remain listed under **Explicitly out of the MVP** in the roadmap.
 
 ## What makes WorkflowGuard different
 
@@ -60,8 +60,9 @@ state.
 
 The project includes the Gradle Wrapper, so a separate Gradle installation is not required.
 
-WorkflowGuard `0.3.3` has been exercised end-to-end on Burp Suite Community
-Edition `2026.7.1`. Community can load and run the extension, but Burp reserves
+WorkflowGuard's runtime behavior was exercised end-to-end on Burp Suite Community
+Edition `2026.7.1` during the `0.3.3` validation campaign. Version `0.3.4` is a
+release-hardening update with no intended workflow-execution behavior changes. Community can load and run the extension, but Burp reserves
 project files and the **All issues** viewer for Professional. WorkflowGuard
 therefore keeps full run evidence in its own tab, supports redacted JSON and
 portable workflow exports, and labels Burp issue publication as **Pro viewer
@@ -85,7 +86,7 @@ On Linux or macOS:
 The loadable extension is produced at:
 
 ```text
-build/libs/workflowguard-0.3.3.jar
+build/libs/workflowguard-0.3.4.jar
 ```
 
 ## Load in Burp Suite
@@ -129,6 +130,7 @@ See [Development workflow](docs/development.md),
 [authenticated laboratory validation](docs/ui-authenticated-validation-20260730.md),
 [BApp readiness matrix](docs/bapp-readiness.md),
 [BApp submission text](docs/bapp-submission.md),
+[0.3.4 release notes](docs/release-notes-0.3.4.md),
 [0.3.3 release notes](docs/release-notes-0.3.3.md),
 [release integrity process](docs/release-integrity.md),
 [Invariant language](docs/invariants.md),
