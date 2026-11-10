@@ -89,6 +89,7 @@ jobs:
           name: workflowguard-release-${{ steps.version.outputs.version }}
           path: dist/
           if-no-files-found: error
+          retention-days: 7
 
       - name: Publish GitHub release
         env:
